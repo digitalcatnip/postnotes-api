@@ -11,3 +11,6 @@ handlers:
 libraries:
 - name: MySQLdb
   version: "latest"
+
+env_variables:
+    FIREBASE_PROJECT_ID: 'post-notes'

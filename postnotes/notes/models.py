@@ -11,3 +11,9 @@ class Note(models.Model):
     note_text = models.CharField(max_length=10000)
     create_date = models.DateTimeField('date created')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def to_json(self):
+        return {
+            'note': self.note_text,
+            'create_date': self.create_date
+        }
