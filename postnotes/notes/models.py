@@ -15,5 +15,6 @@ class Note(models.Model):
     def to_json(self):
         return {
             'note': self.note_text,
-            'create_date': self.create_date
+            'create_date': self.create_date,
+            'id': self.id
         }

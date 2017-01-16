@@ -1,5 +1,6 @@
 import urllib
 import json
+import datetime
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
@@ -61,8 +62,15 @@ class NotesHandler(APIView):
         # Send the response
         return JsonResponse(data=response, status=status.HTTP_200_OK)
 
-    def post(self, request, format=None):
+    def put(self, request, format=None):
         user = get_request_user(request)
         if user is None:
             return HTTP_400('You must send a Firebase token to create notes')
+        note_info = json.loads(request.body)
+        if 'note' in note_info:
+            n = Note(user=user, note_text=note_info['note'], create_date=datetime.datetime.now())
+            n.save()
+            return JsonResponse(data=n.to_json(), status=status.HTTP_200_OK)
+        else:
+            HTTP_400('The note text is missing.')
         pass
