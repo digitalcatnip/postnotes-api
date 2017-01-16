@@ -29,8 +29,7 @@ def get_or_create_user(payload):
         user = User.objects.get(user_id=payload['user_id'])
         return user
     except ObjectDoesNotExist as e:
-        print claims
-        user = User(user_id=payload['user_id'])
+        user = User(user_id=payload['user_id'], name=payload['name'], email=payload['email'])
         user.save()
         return user
 
