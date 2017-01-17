@@ -4,13 +4,20 @@ threadsafe: yes
 
 handlers:
 - url: /static
-  static_dir: static/
+  static_dir: static
 - url: .*
   script: postnotes.wsgi.application
 
 libraries:
 - name: MySQLdb
   version: "latest"
+- name: django
+  version: "1.9"
+- name: pycrypto
+  version: "latest"
+
+builtins:
+- django_wsgi: on
 
 env_variables:
     FIREBASE_PROJECT_ID: 'post-notes'
