@@ -43,6 +43,7 @@ def get_request_user(request):
             return get_or_create_user(payload)
         except jwt.JWTError as e:
             # invalid token!
+            print 'Received error from jwt: ', e
             return None
     else:
         return None
